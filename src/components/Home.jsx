@@ -28,10 +28,10 @@ const Home = () => {
 
 
     return (
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-2 p-4'>
             <h1 className='text-2xl font-bold text-center my-4'>User List</h1>
             <div className="text-end py-3">
-                <Link to='/addUser' className='bg-sky-500 p-3 rounded-sm hover:bg-sky-800'>Add User</Link>
+                <Link to='/addUser' className='border p-2 bg-sky-500 rounded-sm hover:bg-sky-800 mb-4'>Add User</Link>
             </div>
             <div className=''>
                 <table className='w-full text-center'>

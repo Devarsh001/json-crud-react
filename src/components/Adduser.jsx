@@ -177,7 +177,7 @@ const Adduser = () => {
                     <div className="text-right">
                         <button 
                             type="submit" 
-                            className="bg-sky-500 text-white px-4 py-2 rounded hover:bg-sky-800"
+                            className="border p-2 bg-sky-500 rounded-sm hover:bg-sky-800 mb-4"
                         >
                             Add User
                         </button>

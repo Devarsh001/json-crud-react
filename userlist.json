@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": "be02",
+      "name": "Devarsh ",
+      "username": "devarsh2101",
+      "email": "devarsh@gmail.com",
+      "password": "Devarsh",
+      "city": "Ahmedabad",
+      "phone": "9999999999",
+      "website": "devarshsoni.com"
+    },
+    {
+      "id": "c36a",
+      "name": "Admin",
+      "username": "admin",
+      "email": "admin@gmail.com",
+      "password": "admin",
+      "city": "Ahmedabad",
+      "phone": "9999777700",
+      "website": "admin.com"
+    },
+    {
+      "id": "ae97",
+      "name": "user",
+      "username": "user123",
+      "email": "user@gmail.com",
+      "password": "user",
+      "city": "Ahmedabad",
+      "phone": "1111111111",
+      "website": "user.com"
+    }
+  ]
+}

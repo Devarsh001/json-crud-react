@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+
+/* .btnCSS {
+  background: #e6e6e6;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  padding: 10px 20px;
+  color: #333;
+} */
+
+form label {
+  min-width: max-content;
+}
+
+form input {
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+}
+
+table tr {
+  border: 1px solid #e6e6e6;
+}
+
+table td,
+table th {
+  padding: 5px;
+}

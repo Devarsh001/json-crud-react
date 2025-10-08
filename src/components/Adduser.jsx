@@ -3,32 +3,33 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Adduser = () => {
-    // Step 1: Simple form state for each field
     const [formData, setFormData] = useState({
         name: '',
-        username: '',
         email: '',
         password: '',
+        confirmPassword: '',
         city: '',
-        phone: '',
-        website: ''
+        phone: ''
     });
 
     const navigate = useNavigate();
 
-    // Step 2: Handle input changes
+    // Handle input changes
     const handleChange = (e) => {
         const { name, value } = e.target;
-
         setFormData((prevFormData) => ({
             ...prevFormData,
             [name]: value
         }));
     };
 
-    // Step 3: Handle form submit
+    // Handle form submit
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Validation
+        const { confirmPassword, ...dataToSubmit } = formData;
+        console.log(confirmPassword)
 
         const isEmpty = Object.values(formData).some(val => val.trim() === '');
         if (isEmpty) {
@@ -36,8 +37,33 @@ const Adduser = () => {
             return;
         }
 
+        if (formData.password !== formData.confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
+
+        if (formData.password.length < 6) {
+            alert('Password must be at least 6 characters long!');
+            return;
+        }
+
+        // Phone validation (basic)
+        const phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(formData.phone)) {
+            alert('Please enter a valid 10-digit phone number!');
+            return;
+        }
+
         try {
-            const response = await axios.post('http://localhost:8000/users', formData);
+            // Check if user already exists
+            const checkUser = await axios.get(`http://localhost:8000/users?email=${formData.email}`);
+            
+            if (checkUser.data.length > 0) {
+                alert('User with this email already exists!');
+                return;
+            }
+
+            const response = await axios.post('http://localhost:8000/users', dataToSubmit);
             console.log('User added:', response.data);
             alert('User added successfully!');
             navigate('/home');
@@ -48,114 +74,114 @@ const Adduser = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
-            <div className="w-full max-w-2xl p-6 border rounded-lg shadow-lg">
-                <h2 className="text-3xl font-bold text-center mb-6">Add User</h2>
+        <div className="flex flex-col gap-2 p-4">
+            <h1 className="text-2xl font-bold text-center my-4">Add User</h1>
+            
+            <div className="max-w-2xl mx-auto w-full p-6 border rounded shadow-md">
+                <button 
+                    onClick={() => navigate('/home')} 
+                    className="border py-1 px-3 bg-white text-black rounded-sm hover:bg-gray-100 mb-4"
+                >
+                    Back
+                </button>
 
-                <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-
+                <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-x-4 space-y-4">
                     {/* Name */}
-                    <div className="flex flex-col">
-                        <label htmlFor="name">Name*</label>
+                    <div>
+                        <label htmlFor="name" className="block font-medium">Name*</label>
                         <input
                             type="text"
                             id="name"
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
-                            className="border p-2 rounded"
-                        />
-                    </div>
-
-                    {/* Username */}
-                    <div className="flex flex-col">
-                        <label htmlFor="username">Username*</label>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            value={formData.username}
-                            onChange={handleChange}
-                            className="border p-2 rounded"
+                            className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                            placeholder="Enter full name"
                         />
                     </div>
 
                     {/* Email */}
-                    <div className="flex flex-col">
-                        <label htmlFor="email">Email*</label>
+                    <div>
+                        <label htmlFor="email" className="block font-medium">Email*</label>
                         <input
                             type="email"
                             id="email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            className="border p-2 rounded"
+                            className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                            placeholder="Enter email"
                         />
                     </div>
 
-                    {/* Password (full width) */}
-                    <div className="flex flex-col">
-                        <label htmlFor="password">Password*</label>
+                    {/* Password */}
+                    <div>
+                        <label htmlFor="password" className="block font-medium">Password*</label>
                         <input
                             type="password"
                             id="password"
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-                            className="border p-2 rounded"
+                            className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                            placeholder="Min. 6 characters"
+                        />
+                    </div>
+
+                    {/* Confirm Password */}
+                    <div>
+                        <label htmlFor="confirmPassword" className="block font-medium">Confirm Password*</label>
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                            placeholder="Re-enter password"
                         />
                     </div>
 
                     {/* City */}
-                    <div className="flex flex-col">
-                        <label htmlFor="city">City*</label>
+                    <div>
+                        <label htmlFor="city" className="block font-medium">City*</label>
                         <input
                             type="text"
                             id="city"
                             name="city"
                             value={formData.city}
                             onChange={handleChange}
-                            className="border p-2 rounded"
+                            className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                            placeholder="Enter city"
                         />
                     </div>
 
                     {/* Phone */}
-                    <div className="flex flex-col">
-                        <label htmlFor="phone">Phone*</label>
+                    <div>
+                        <label htmlFor="phone" className="block font-medium">Phone*</label>
                         <input
-                            type="text"
+                            type="tel"
                             id="phone"
                             name="phone"
                             value={formData.phone}
                             onChange={handleChange}
-                            className="border p-2 rounded"
+                            maxLength="10"
+                            className="w-full border border-gray-300 rounded px-3 py-2 mt-1"
+                            placeholder="10-digit number"
                         />
                     </div>
 
-                    {/* Website */}
-                    <div className="flex flex-col col-span-2">
-                        <label htmlFor="website">Website*</label>
-                        <input
-                            type="text"
-                            id="website"
-                            name="website"
-                            value={formData.website}
-                            onChange={handleChange}
-                            className="border p-2 rounded"
-                        />
-                    </div>
+                    <div className="hidden md:block"></div>
 
-                    {/* Empty for spacing + Submit Button */}
-                    <div></div>
-                    <div className="flex justify-end">
-                        <button
-                            type="submit"
-                            className="bg-sky-500 text-white px-4 py-2 rounded hover:bg-sky-600"
+                    {/* Submit Button */}
+                    <div className="text-right">
+                        <button 
+                            type="submit" 
+                            className="bg-sky-500 text-white px-4 py-2 rounded hover:bg-sky-800"
                         >
-                            Submit
+                            Add User
                         </button>
                     </div>
-
                 </form>
             </div>
         </div>

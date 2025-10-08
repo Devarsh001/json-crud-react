@@ -42,7 +42,6 @@ const Home = () => {
                             <th>Email</th>
                             <th>Phone</th>
                             <th>City</th>
-                            <th>Website</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -63,11 +62,6 @@ const Home = () => {
                                 </td>
                                 <td>
                                     {user.city || 'NA'}
-                                </td>
-                                <td>
-                                    <a href={user.website || 'NA'}>
-                                        {user.website || 'NA'}
-                                    </a>
                                 </td>
                                 <td className='flex gap-2 py-2 justify-center'>
                                     <Link to={`/viewUser/${user.id}`}>

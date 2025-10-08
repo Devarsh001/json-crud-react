@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* .btnCSS {
   background: #e6e6e6;
@@ -7,21 +7,45 @@
   padding: 10px 20px;
   color: #333;
 } */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* background: linear-gradient(90deg, #e6e6e6 0%, #333333 100%); */
+  /* color: #000000; */
+  background: #333333;
+  color: #e6e6e6;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+* {
+  box-sizing: border-box;
+}
 
 form label {
   min-width: max-content;
 }
 
 form input {
-  border: 1px solid #e6e6e6;
+  border: 1px solid #d3d3d34a;
   border-radius: 4px;
 }
 
 table tr {
-  border: 1px solid #e6e6e6;
+  border: 1px solid #d3d3d34a;
 }
 
 table td,
 table th {
   padding: 5px;
+}
+
+table td {
+  font-weight: 300;
 }

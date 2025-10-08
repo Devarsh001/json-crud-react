@@ -49,28 +49,6 @@ const Login = () => {
         }
     };
 
-    /*
-    const handleSubmit = (e) => {
-      e.preventDefault();
-  
-      const username = document.getElementById('username');
-      const password = document.getElementById('password');
-  
-      if (
-        username.value === "" ||
-        password.value === "" ||
-        username.value === null ||
-        password.value === null
-      ) {
-        alert("Enter credentials!");
-      } else {
-        navigate('/home');
-        console.log("Username:", username.value);
-        console.log("Password:", password.value);
-      }
-    }
-    */
-
     return (
         <div className="p-5 border rounded-lg w-[400px] mx-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <div className="flex flex-col justify-center text-center gap-5">
@@ -109,12 +87,23 @@ const Login = () => {
                     <div>
                         <button
                             type="submit"
-                            className="bg-sky-500 text-white px-4 py-2 rounded hover:bg-sky-600"
+                            className="bg-sky-500 text-white px-4 py-2 rounded hover:bg-sky-600 w-full"
                         >
                             Login
                         </button>
                     </div>
                 </form>
+
+                {/* Link to Register */}
+                <div className="text-sm">
+                    Don't have an account?{' '}
+                    <button
+                        onClick={() => navigate('/addUser')}
+                        className="text-sky-500 hover:underline"
+                    >
+                        Register here
+                    </button>
+                </div>
             </div>
         </div>
     );
